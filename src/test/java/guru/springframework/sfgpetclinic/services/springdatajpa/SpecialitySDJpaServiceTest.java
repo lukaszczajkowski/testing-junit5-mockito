@@ -70,6 +70,15 @@ class SpecialitySDJpaServiceTest {
         Speciality foundSpecialty = service.findById(1L);
 
         assertThat(foundSpecialty).isNotNull();
-        verify(specialtyRepository).findById(1L);
+        verify(specialtyRepository).findById(anyLong());
+    }
+
+    @Test
+    void shouldDeleteByObject() {
+        Speciality speciality = new Speciality();
+
+        service.delete(speciality);
+
+        verify(specialtyRepository).delete(any(Speciality.class));
     }
 }
